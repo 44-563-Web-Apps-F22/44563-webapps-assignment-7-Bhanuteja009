@@ -27,10 +27,6 @@
 
     <h1>Bhanuteja Chitrala builds a cycler</h1>
 
-    <div>
-        <input type="text" id="value">
-    </div>
-    <br>
 
 	<div class="flex-container" id="target">
         <div class="cycler">row item 1</div>   
@@ -38,9 +34,18 @@
         <div class="cycler">row item 3</div>  
     </div>	
 	
-	<p> Press the button to create an new element of type div and then add it to the container.
-		</p>
-		<button onclick="makeNewDiv()">Add value</button>
+	<p> Press the button to create an new element of type div and then add it to the container.</p>
+	
+    <div>
+        <input type="text" id="value">
+    </div>
+    <br>
+
+    <button onclick="makeNewDiv()">Add value</button>
+
+    <button onclick="get()">Get</button>
+
+    <button onclick="spin()">Spin</button>
 	
 	
 </body>
@@ -57,5 +62,28 @@
 		container.appendChild(element)
 		
 	}
+
+    function get(){
+        var cyclerItems=document.getElementsByClassName("cycler")
+        var length=cyclerItems.length
+        if(length>0){
+            cyclerItems[length-1].remove()
+        }
+        
+    }
+
+    function spin(){
+        var cyclerItems=document.getElementsByClassName("cycler")
+        var length=cyclerItems.length
+        if(length>1){
+            
+            removedItem=document.createElement("div")
+            removedItem.innerHTML=cyclerItems[length-1].textContent
+            removedItem.className="cycler"
+            cyclerItems[length-1].remove()
+            var container=document.getElementById("target")
+            container.insertBefore(removedItem,container.firstChild)
+        }
+    }
 </script>
 </html>	
