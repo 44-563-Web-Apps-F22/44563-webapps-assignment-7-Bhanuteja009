@@ -16,9 +16,10 @@
 <body>
     <h1>Treasure hunt Bhanuteja Chitrala</h1>
 
-    <div class="container border " style="background-color: lavenderblush ;">
-        <p style="color:black">Click on the chests to search for treasure</p>
+    <div class="container border ">
+        <h2><p style="color:black">Click on the chests to search for treasure</p></h2>
     </div>
+    
     <div class="container border" style="background-color:grey ;" id="chests">
         <p style="color:black">Number of chests checked is zero</p>
         </p>
@@ -29,6 +30,8 @@
     <div class="container border" style="background-color:lightsalmon" id="help">
         <p>Help report</p>
     </div>
+    <br>
+    <div class="container"><button type="button"  class="btn btn-primary" onclick="bonusGame()">New Game</button></div>
     <br>
     <div class="container">
         <div class="image-row d-flex justify-content-center">
@@ -150,10 +153,13 @@
             var row = Math.floor(lastCheck/5)
             var column=lastCheck%5
 
-            if(row==3 && column==3){
-                document.getElementById("help").innerHTML="Sorry, no help available"
+            var treasureRow = Math.floor(treasureLocation/5)
+            var treasureColumn = treasureLocation%5
+
+            if(row==treasureRow && column==treasureColumn){
+                document.getElementById("help").innerHTML="Already, won the game. Sorry, no help available"
             }
-            else if(row==3){
+            else if(row==treasureRow){
                 if(treasureLocation-lastCheck>0){
                     document.getElementById("help").innerHTML="right"
                 }
@@ -161,7 +167,7 @@
                     document.getElementById("help").innerHTML="left"
                 }
             }
-            else if(column==3){
+            else if(column==treasureColumn){
                 if(treasureLocation-lastCheck>0){
                     document.getElementById("help").innerHTML="down"
                 }
@@ -174,6 +180,23 @@
             }
             score+=2
             document.getElementById("Score").innerHTML="score is "+score
+
+        }
+
+        function bonusGame(){
+            chestCount=0
+            score=0
+            treasureLocation=Math.floor(Math.random()*24)
+            if(treasureLocation==12){
+                treasureLocation=12+Math.floor(Math.random()*12)
+            }
+            document.getElementById("chests").innerHTML="Number of chests checked is zero "
+            document.getElementById("Score").innerHTML="Score is unknown"
+
+            for (var i = 0; i <= 24; i++) {
+               if(i != 12)
+                  document.getElementById(ids[i]).src = "closed_chest.jfif"
+            }
 
         }
     </script>

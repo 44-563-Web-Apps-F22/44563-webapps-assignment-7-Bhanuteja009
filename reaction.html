@@ -37,14 +37,15 @@
     }
 
     function startTime(){
-      for(let i=0;i<4;i++){
+        var startCount=Math.floor(Math.random()*8)+2
+      for(let i=0;i<=startCount;i++){
         setTimeout(()=>{
         document.getElementById('countdown').innerHTML = "Countdown "+i
-        }, (3-i)*1000)
+        }, (startCount-i)*1000)
       }
 
       setTimeout(()=>{
-        checkTime()}, 3000)
+        checkTime()}, startCount*1000)
 
     }
 
